@@ -1,0 +1,14 @@
+[10-Nov-2021 21:39:04 UTC] PHP Warning:  mysqli::__construct(): (HY000/2003): Can't connect to MySQL server on '10.169.0.210' (110 &quot;Connection timed out&quot;) in /home/laneonli/fastlane.life/models/database.php on line 18
+[10-Nov-2021 21:39:04 UTC] PHP Notice:  Undefined property: Database::$connection in /home/laneonli/fastlane.life/models/database.php on line 21
+[10-Nov-2021 21:39:04 UTC] PHP Notice:  Trying to get property of non-object in /home/laneonli/fastlane.life/models/database.php on line 21
+[26-Oct-2022 16:15:01 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on boolean in /home/laneonli/fastlane.life/models/item.php on line 53
+[26-Oct-2022 16:15:05 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on boolean in /home/laneonli/fastlane.life/models/item.php on line 53
+[26-Oct-2022 16:15:07 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on boolean in /home/laneonli/fastlane.life/models/item.php on line 53
+[26-Oct-2022 16:15:07 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on boolean in /home/laneonli/fastlane.life/models/item.php on line 53
+[26-Oct-2022 16:15:09 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on boolean in /home/laneonli/fastlane.life/models/item.php on line 53
+[26-Oct-2022 16:15:32 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on boolean in /home/laneonli/fastlane.life/models/item.php on line 53
+[26-Oct-2022 16:15:45 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on boolean in /home/laneonli/fastlane.life/models/item.php on line 53
+[26-Oct-2022 16:17:04 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on boolean in /home/laneonli/fastlane.life/models/item.php on line 53
+[26-Oct-2022 16:17:11 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on boolean in /home/laneonli/fastlane.life/models/item.php on line 53
+[26-Oct-2022 20:26:22 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on boolean in /home/laneonli/fastlane.life/models/item.php on line 53
+[23-Nov-2022 13:10:17 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on boolean in /home/laneonli/fastlane.life/models/item.php on line 53
