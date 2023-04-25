@@ -42,8 +42,8 @@ function sendDataAjax(formData){
         if (request.readyState == 4) {
           if (request.status == 200) {
               var data = request.responseText;
+          //    console.log(data);
               obj = JSON.parse(data);
-              console.log(obj);
                 drawData(obj);          }
         }
     };
@@ -261,7 +261,7 @@ function setStats(obj){
 }
 
 function setAtkPowDef(obj){
-     console.log(obj);
+   //  console.log(obj);
     var item_type = formData.get("gen--type_type");
     var patt = new RegExp("defmdef");
     if (item_type == "weapon"){

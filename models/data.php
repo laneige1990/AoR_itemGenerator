@@ -53,34 +53,21 @@
 
     private function getAttributes($connection, $row, $taxonomy){
         $id = $row['ID'];
-        $test = array();
-        $sql = "SELECT attribute_id
-                FROM image_attributes 
-                WHERE img_id=$id";
+        $sql = "SELECT gear.attribute
+        FROM gear_attributes as gear 
+        INNER JOIN image_attributes as image
+        ON image.attribute_id = gear.ID
+        WHERE gear.taxonomy_id IN (" . implode(',', $taxonomy) . ") 
+        AND  image.img_id = ". $id;
+
         $result = $connection->query($sql);
       //  return $result->fetch_object();
       //  die(json_encode( $result->fetch_assoc())); 
-        while($row = $result->fetch_assoc()){
-            if ($row == "" || $row == null){
-                continue;
-            }
-            $attribute_id = $row['attribute_id'];
-            
-            $sql = "SELECT attribute
-            FROM gear_attributes 
-            WHERE ID=$attribute_id AND taxonomy_id IN (" . implode(',', $taxonomy) . ")";
-            $result2 = $connection->query($sql);
-            while($row2 = $result2->fetch_row()){
-                if ($row2 == "" || $row2 == null){
-                    continue;
-                 }
-                 return $row2;   
-            }
-            
+        $returnValue = [];
+        while($row = $result->fetch_assoc()) {
+            $returnValue[] = $row;
         }
-        return $test;
-                 
-
+        return $returnValue;
     }
 }
 

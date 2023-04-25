@@ -84,7 +84,11 @@ document.addEventListener('click', function (event) {
                 row.id = id;
                 text = document.createTextNode(element[key]);
             }else if(key == "rarity" || key == "type"){
-                text = document.createTextNode(element[key][0]);
+                string = "";
+                Array.prototype.forEach.call( element[key], function(attributeObject) {
+                    string = string + attributeObject.attribute + ",";
+                }); 
+                text = document.createTextNode(string);
             }else if(key == "element"){
                 text = getElements(element[key])         
             }

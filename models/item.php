@@ -4,12 +4,10 @@
     public function potentialImages(){
         $connection = new Database();
         $item_ids = $this->getItemsByType($connection);
-
         $item_ids = $this->getItemsByAttributes($connection, $item_ids);
         if (isset($item_ids) && count($item_ids) != 0){
             
             $image_data = $this->chooseItem($connection, $item_ids );
-
             $elements = $this->getElement($connection, $image_data );
             $image_data['elements'] = $elements;
 
@@ -19,8 +17,10 @@
             $stats = $this->getStats($connection);
             $image_data['stats'] = $stats;
 
-            $stats = $this->getNames($connection, $image_data);
-            $image_data['name'] = $stats;
+           die(json_encode($image_data));
+
+            // $stats = $this->getNames($connection, $image_data);
+            // $image_data['name'] = $stats;
             echo json_encode( $image_data);
         }else{
             echo 0;
@@ -149,7 +149,6 @@
 
     private function getItemsByType($connection){
         $gen_type = $_POST['gen--type'];
-
         $gen_sub_type = "";
         $img_ids_return = array();
         $img_ids_ = array();

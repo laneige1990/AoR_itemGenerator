@@ -31,20 +31,18 @@
                 } else {
                     echo "Sorry, there was an error uploading your file." . "<br>";
                 }
-            } 
-
+            }
             $this->saveImageMeta($target_file);
         }
 
         private function saveImageMeta($target_file){
             $connection = new Database();
             $temp_image_datas = $_POST;
-           // echo "<script>console.log(".json_encode($temp_image_datas).");</script>";
             // insert into image_meta table
             $sql = "INSERT INTO image_meta (image_url) VALUES ('$target_file')";
             if ($connection->query($sql)) {
                 $last_id = $connection->insert_id;
-            //    echo "New record created successfully. ID is: " . $last_id . "<br>";
+                echo "New record created successfully. ID is: " . $last_id . "<br>";
             } else {
                 echo "Error: " . $sql . "<br>" . $connection->error . "<br>";
             }
