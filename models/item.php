@@ -17,8 +17,6 @@
             $stats = $this->getStats($connection);
             $image_data['stats'] = $stats;
 
-           die(json_encode($image_data));
-
             // $stats = $this->getNames($connection, $image_data);
             // $image_data['name'] = $stats;
             echo json_encode( $image_data);
@@ -48,18 +46,18 @@
 
     private function getStats($connection){
         $result_val = array();
-        $sql = "SELECT statkey, statvalue FROM stats WHERE type=0";
+        $sql = "SELECT statkey, statvalue, party_position FROM stats";
         $result = $connection->query($sql);
         while($row = $result->fetch_assoc()){
             $result_val[] = $row;
        }   
+
         return $result_val;
     }
 
     public function getState($connection, $image_data ){
         $item_states = array();
         $img_id = $image_data['ID'];
-   
         $sql = "SELECT attribute_id FROM image_attributes WHERE img_id=$img_id";
         $result = $connection->query($sql);   
         while($row = $result->fetch_assoc()){ // each attribute by img id

@@ -42,7 +42,7 @@ function sendDataAjax(formData){
         if (request.readyState == 4) {
           if (request.status == 200) {
               var data = request.responseText;
-          //    console.log(data);
+           ///   console.log(data);
               obj = JSON.parse(data);
                 drawData(obj);          }
         }
@@ -63,7 +63,7 @@ function drawData(obj){
         name = document.getElementById("gen--name").value;
         formData.set("gen--name", name);
         if (name == ""){
-            formData.set("gen--name", generate_name(obj));
+          //  formData.set("gen--name", generate_name(obj));
             name_container = document.getElementById("fin-item_name");
             name_container.innerHTML = ""
             name_container.innerHTML = formData.get("gen--name");
@@ -236,22 +236,22 @@ function setStats(obj){
         
          switch(stat_chooser){
             case 1: //HP
-                stats = {statkey: "hpsp", id: "hp", title: "HP: "};   
+                stats = {statkey: "hp", id: "hp", title: "HP: "};   
             break;
             case 2: // SP
-                stats = {statkey: "hpsp", id: "sp", title: "SP: "};
+                stats = {statkey: "sp", id: "sp", title: "SP: "};
                 break;
             case 3: // STR
-                stats = {statkey: "stat", id: "str", title: "STR: "};
+                stats = {statkey: "str", id: "str", title: "STR: "};
                 break;
             case 4: // DEX
-                stats = {statkey: "stat", id: "dex", title: "DEX: "};   
+                stats = {statkey: "dex", id: "dex", title: "DEX: "};   
                 break;
             case 5: // AGI
-                stats = {statkey: "stat", id: "agi", title: "AGI: "};
+                stats = {statkey: "agi", id: "agi", title: "AGI: "};
                 break;
             case 6: //INT
-                stats = {statkey: "stat", id: "int", title: "INT: "};
+                stats = {statkey: "int", id: "int", title: "INT: "};
                 break;
         } 
         master_stats.push(stats.id);
@@ -263,16 +263,29 @@ function setStats(obj){
 function setAtkPowDef(obj){
    //  console.log(obj);
     var item_type = formData.get("gen--type_type");
-    var patt = new RegExp("defmdef");
-    if (item_type == "weapon"){
-         patt = new RegExp("atkpow");
-    }
+    var party_position = Math.floor(Math.random() * (4 - 1) + 1);
+  //  var patt = new RegExp("defmdef");
+    var patt = new RegExp("atkpow");
     stats = [];
     obj['stats'].forEach(function(element) {
         if (patt.test(element['statkey'])){
             stats.push(element);
         }   
     });
+    if (item_type == "weapon"){
+         switch(party_position){
+            // case 1:  this is not needed
+            //     stats[0].statvalue = stats[0].statvalue;
+            // break;
+            case 2:
+                stats[0].statvalue = stats[0].statvalue * 0.1 + stats[0].statvalue;
+            break;
+            case 3:
+                stats[0].statvalue = stats[0].statvalue - (stats[0].statvalue * 0.2);
+            break;
+        }
+        console.log(stats);
+    }
     stat = calculationFormula(stats);
     element_container = document.getElementById("fin-atkdef");
     if (document.getElementById("fin-atkdef-atkdef") == null){
@@ -340,10 +353,8 @@ function setStat(obj, stats_){
 }
 
 function calculationFormula(stats){
-
     stat_rating = Math.floor(Math.random() * stats.length);
     stat_value = stats[stat_rating].statvalue;
-    
     // work out raw stat number
     stat_value = stat_value.split("+");
     stat_value[0] = parseFloat(stat_value[0]);

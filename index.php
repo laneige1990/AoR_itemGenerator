@@ -364,7 +364,7 @@
                                     <!-- /Item Rarity -->
                                     <div class="row mb-3">
                                         <div class="col">
-                                            <button type="submit" name="submit"
+                                            <button type="submit"
                                                 class="btn btn-primary mb-2">Submit</button>
                                         </div>
                                     </div>
@@ -635,7 +635,7 @@
                                         <div class="col">
                                             <label class="w-100">Rarity</label>
                                             <div class="form-check form-check-inline">
-                                                <select class="form-control col" name="gen--rarity" id="gen--rarity">
+                                            <select class="form-control col" name="gen--rarity" id="gen--rarity">
                                                     <option it_type="armour" value="58">Broken</option>
                                                     <option it_type="armour" value="59" selected>Common</option>
                                                     <option it_type="armour" value="60">Uncommon</option>
@@ -648,7 +648,7 @@
                                     <!-- /Item Rarity -->
                                     <div class="row mb-3">
                                         <div class="col">
-                                            <button type="submit" name="submit" id="gen--submit"
+                                            <button type="submit" id="gen--submit"
                                                 value="gen" class="btn btn-primary mb-2">Generate Item</button>
                                         </div>
                                     </div>
@@ -664,7 +664,6 @@
                                         <div class="d-flex w-100 justify-content-between">
                                             <h6 class="mb-1 ">Weapon Name</h6>
                                             <img width="24px" height="24px" id="fin-item_img">
-
                                         </div>
                                         <p id="fin-item_name" class="mb-1"></p>
                                         <hr class="w-100"/>
@@ -680,7 +679,6 @@
                                         <h6 class="mb-1 w-100">Attack</h6>
                                         <div id="fin-atkdef" class="w-100"></div>
                                     </li>
-
                                 </ul>
                             </div>
                     </div>

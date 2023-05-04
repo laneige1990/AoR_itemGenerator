@@ -38,7 +38,7 @@ document.addEventListener('click', function (event) {
           if (request.status == 200) {
               var data = request.responseText;
               obj = JSON.parse(data);
-     //        console.log(obj);
+            //  console.log(obj);
               drawTable(obj);   
               document.getElementById("overlay").style.display = "none";       
             }
