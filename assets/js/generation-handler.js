@@ -236,56 +236,58 @@ function setStats(obj){
         
          switch(stat_chooser){
             case 1: //HP
-                stats = {statkey: "hp", id: "hp", title: "HP: "};   
+                stats = {statkey: "hpsp", id: "hp", title: "HP: "};   
             break;
             case 2: // SP
-                stats = {statkey: "sp", id: "sp", title: "SP: "};
+                stats = {statkey: "hpsp", id: "sp", title: "SP: "};
                 break;
             case 3: // STR
-                stats = {statkey: "str", id: "str", title: "STR: "};
+                stats = {statkey: "stat", id: "str", title: "STR: "};
                 break;
             case 4: // DEX
-                stats = {statkey: "dex", id: "dex", title: "DEX: "};   
+                stats = {statkey: "stat", id: "dex", title: "DEX: "};   
                 break;
             case 5: // AGI
-                stats = {statkey: "agi", id: "agi", title: "AGI: "};
+                stats = {statkey: "stat", id: "agi", title: "AGI: "};
                 break;
             case 6: //INT
-                stats = {statkey: "int", id: "int", title: "INT: "};
+                stats = {statkey: "stat", id: "int", title: "INT: "};
                 break;
         } 
-        master_stats.push(stats.id);
-        setStat(obj, stats);
+        master_stats.push(stats);
     }
-    setAtkPowDef(obj, stats);
+
+    setStat(obj, master_stats);
+    setAtkPowDef(obj, master_stats);
 }
 
-function setAtkPowDef(obj){
+function setAtkPowDef(obj, master_stats){
    //  console.log(obj);
     var item_type = formData.get("gen--type_type");
-    var party_position = Math.floor(Math.random() * (4 - 1) + 1);
-  //  var patt = new RegExp("defmdef");
-    var patt = new RegExp("atkpow");
+    var item_type_value = formData.get("gen--type");
     stats = [];
     obj['stats'].forEach(function(element) {
-        if (patt.test(element['statkey'])){
+        if (item_type == "weapon" && element['statkey'] == "atkpow" || element['statkey'] == "pmdef" && item_type == "armour"){
             stats.push(element);
         }   
-    });
-    if (item_type == "weapon"){
-         switch(party_position){
-            // case 1:  this is not needed
-            //     stats[0].statvalue = stats[0].statvalue;
-            // break;
+    });  
+    // enforce rankings for item type
+    if (item_type == "armour")
+        switch(item_type_value){
+            case 1:
+                //todo: remove from array the correct rankings.
+            break;
             case 2:
-                stats[0].statvalue = stats[0].statvalue * 0.1 + stats[0].statvalue;
             break;
             case 3:
-                stats[0].statvalue = stats[0].statvalue - (stats[0].statvalue * 0.2);
+            break;
+            case 4:
+            break;
+            case 5:
             break;
         }
-        console.log(stats);
     }
+    console.log(item_type_value);
     stat = calculationFormula(stats);
     element_container = document.getElementById("fin-atkdef");
     if (document.getElementById("fin-atkdef-atkdef") == null){
@@ -301,6 +303,8 @@ function setAtkPowDef(obj){
     if (item_type == "weapon"){
         div.innerHTML = "ATK: " + stat;
     }else{
+        // Todo: make sure that the pick is more likely pdef on all - mdef rare pick
+        // higher on robes.
         var stat = getSubTypeStat(stat,  formData.get("gen--sub_type"));
         stat_chooser = Math.floor(Math.random() * 2);
         if (stat_chooser == 1){
@@ -326,30 +330,30 @@ function getSubTypeStat(stat, subtype){
     return stat;
 }
 
-function setStat(obj, stats_){
-    var patt = new RegExp(stats_.statkey);
-    stats = [];
-    obj['stats'].forEach(function(element) {
-        if (patt.test(element['statkey'])){
-            stats.push(element);
+function setStat(obj, pickedStats){
+    pickedStats.forEach(function(pickedStat) {
+        stats = [];
+        obj['stats'].forEach(function(element) {
+            if (pickedStat['statkey'] == element['statkey']){
+                stats.push(element);
+            }   
+        });    
+        stat = calculationFormula(stats);
+        element_container = document.getElementById("fin-stats");
+        if (document.getElementById("fin-stats-"+pickedStat.id) == null){
+            internal_container = document.createElement( "div");
+            internal_container.setAttribute("id", "fin-stats-"+pickedStat.id);
+            internal_container.setAttribute("class", "w-50 d-inline-block");
+            element_container.appendChild(internal_container);
+        }else{
+            internal_container = document.getElementById("fin-stats-"+pickedStat.id)
+            internal_container.innerHTML = "";
         }   
+        var div = document.createElement('span');
+        div.innerHTML = pickedStat.title + stat;
+
+        internal_container.appendChild(div);
     });
-    stat = calculationFormula(stats);
-    element_container = document.getElementById("fin-stats");
-    if (document.getElementById("fin-stats-"+stats_.id) == null){
-        internal_container = document.createElement("div");
-        internal_container.setAttribute("id", "fin-stats-"+stats_.id);
-        internal_container.setAttribute("class", "w-50 d-inline-block");
-        element_container.appendChild(internal_container);
-    }else{
-        internal_container = document.getElementById("fin-stats-"+stats_.id)
-        internal_container.innerHTML = "";
-    }   
-    var div = document.createElement('span');
-    div.innerHTML = stats_.title + stat;
-
-    internal_container.appendChild(div);
-
 }
 
 function calculationFormula(stats){

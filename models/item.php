@@ -46,7 +46,7 @@
 
     private function getStats($connection){
         $result_val = array();
-        $sql = "SELECT statkey, statvalue, party_position FROM stats";
+        $sql = "SELECT statkey, statvalue, rank FROM stats";
         $result = $connection->query($sql);
         while($row = $result->fetch_assoc()){
             $result_val[] = $row;
